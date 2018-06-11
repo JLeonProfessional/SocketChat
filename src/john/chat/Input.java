@@ -1,3 +1,4 @@
+package john.chat;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -14,19 +15,14 @@ public class Input implements Runnable{
 	public void run() {
 		try {
 			while(true) {
-
 				DataOutputStream output = new DataOutputStream(socket.getOutputStream());
 				DataInputStream input = new DataInputStream(socket.getInputStream());
-				System.out.println("Enter");
 				String msg = new Scanner(System.in).nextLine();
 				output.writeUTF(msg);
 				if("stop".equals(msg)) {
 					break;
 				}
-				String answer = input.readUTF();
-				System.out.println(answer);
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
