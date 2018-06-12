@@ -13,11 +13,14 @@ public class Input implements Runnable{
 	}
 	@Override
 	public void run() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter your name");
+		String name = scanner.nextLine();
 		try {
+			DataOutputStream output = new DataOutputStream(socket.getOutputStream());
+			output.writeUTF(name);
 			while(true) {
-				DataOutputStream output = new DataOutputStream(socket.getOutputStream());
-				DataInputStream input = new DataInputStream(socket.getInputStream());
-				String msg = new Scanner(System.in).nextLine();
+				String msg = scanner.nextLine();
 				output.writeUTF(msg);
 				if("stop".equals(msg)) {
 					break;

@@ -20,12 +20,13 @@ public class ServerThread implements Runnable{
 		boolean running = true;
 		DataOutputStream out;
 		try {
+			DataInputStream in = new DataInputStream(socket.getInputStream());
+			String name = in.readUTF();
 			for(int i = 0; i < listSockets.size(); i++) {
 				out = new DataOutputStream(listSockets.get(i).getOutputStream());
-				out.writeUTF(clientNumber + " has entered the room.");
+				out.writeUTF(clientNumber + ":" + name + " has entered the room.");
 			}
 			while(running) {
-				DataInputStream in = new DataInputStream(socket.getInputStream());
 				out = new DataOutputStream(socket.getOutputStream());
 				String input = in.readUTF();
 				if("stop".equals(input)) {
