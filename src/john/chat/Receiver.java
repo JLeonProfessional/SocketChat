@@ -7,9 +7,11 @@ import java.net.Socket;
 public class Receiver implements Runnable{
 
 	private Socket socket;
+	private ClientWindow window;
 
-	public Receiver(Socket socket) {
+	public Receiver(Socket socket, ClientWindow window) {
 		this.socket = socket;
+		this.window = window;
 	}
 
 
@@ -21,11 +23,12 @@ public class Receiver implements Runnable{
 			while(true) {
 				String input = in.readUTF();
 				System.out.println(input);
+				window.addText(input);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }

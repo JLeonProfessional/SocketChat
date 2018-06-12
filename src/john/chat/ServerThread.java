@@ -34,7 +34,7 @@ public class ServerThread implements Runnable{
 				} else {
 					for(int i = 0; i < listSockets.size(); i++) {
 						out = new DataOutputStream(listSockets.get(i).getOutputStream());
-						out.writeUTF(clientNumber + ":" + name + input);
+						out.writeUTF(name + ": " + input);
 					}
 				}
 			}
