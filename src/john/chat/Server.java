@@ -10,7 +10,7 @@ public class Server {
 		int clientNumber = 0;
 		ArrayList<Socket> listSockets = new ArrayList<Socket>();
 		ArrayList<ServerThread> listServers = new ArrayList<ServerThread>();
-		while (true) {
+		for (int x = 0; x < 10; x++) {
 			Socket socket = listener.accept();
 			listSockets.add(socket);
 			ServerThread serverThread = new ServerThread(socket, clientNumber, listSockets);
@@ -22,5 +22,6 @@ public class Server {
 			thread.start();
 			clientNumber++;
 		}
+		listener.close();
 	}
 }
